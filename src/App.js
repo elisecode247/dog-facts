@@ -14,7 +14,8 @@ function getRandomInt(max) {
 function App() {
   const [dogImageUrl, setDogImageUrl] = useState('');
   const [dogFact, setDogFact] = useState('');
-  const isLoading = !dogImageUrl;
+  const isPhotoLoading = !dogImageUrl;
+  const isFactLoading = !dogFact;
   const imageStyle = {
     margin: 'auto',
     minWidth: '250px',
@@ -24,31 +25,50 @@ function App() {
 
   useEffect(() => {
     document.title = 'Dogs Facts';
-    setTimeout(fetchData, 3000);
-
-    async function fetchData() {
-      const dogImageResponse = await fetch('https://random.dog/woof.json');
-      const dogImage = await dogImageResponse.json();
-
-      if (dogImage) {
-        setDogImageUrl(dogImage.url);
-        setDogFact(dogFacts[getRandomInt(dogFactsCount)].fact)
-      }
-    }
-
+    setDogImageUrl('');
+    fetchDogImage().then(() => {
+      setDogFact(dogFacts[getRandomInt(dogFactsCount)].fact)
+    });
   }, []);
+
+  async function fetchDogImage() {
+    const dogImageResponse = await fetch('https://random.dog/woof.json');
+    const dogImage = await dogImageResponse.json();
+
+    if (dogImage) {
+      setTimeout(() => setDogImageUrl(dogImage.url), 3000);
+    }
+  }
+
+  function handleClickNewPhoto() {
+    setDogImageUrl('');
+    fetchDogImage();
+  }
+
+  function handleClickNewFact() {
+    setDogFact('');
+    setTimeout(() => setDogFact(dogFacts[getRandomInt(dogFactsCount)].fact), 1000);
+  }
 
   return (
     <>
       <header>
         <h1> Dog Facts </h1>
       </header>
-      <main className="App" style={isLoading ? loadingMainStyle : loadedMainStyle}>
-        {isLoading ?
+      <main className="App" style={isPhotoLoading ? loadingMainStyle : loadedMainStyle}>
+        {isPhotoLoading ?
           (<LoadingDog />) :
           (<img alt="random dog" className="App-logo image-container" src={dogImageUrl} style={imageStyle} />)
         }
         <p>{dogFact}</p>
+        <div>
+          <button onClick={handleClickNewPhoto}>
+            { isPhotoLoading ? 'loading...' : 'Get New Photo' }
+          </button>
+          <button onClick={handleClickNewFact}>
+            {isFactLoading ? 'loading...' : 'Get New Fact'}
+          </button>
+        </div>
       </main>
       <footer className="footer">
         <a

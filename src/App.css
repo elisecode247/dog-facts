@@ -47,3 +47,18 @@ h1 {
   margin: 3rem auto 1rem auto;
   text-align: center;
 }
+
+button {
+  background-color: white;
+  padding: 0.5rem;
+  border: 1px solid #61dafb8c;
+  border-radius: 10px;
+  color: #002879;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button:hover {
+  border: 1px solid blueviolet;
+  color: blueviolet;
+
+}
