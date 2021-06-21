@@ -19,8 +19,7 @@ function App() {
     margin: 'auto',
     minWidth: '250px',
     width: 'auto',
-    height: '250px',
-    background: `url(${dogImageUrl}) no-repeat center`
+    height: '250px'
   };
 
   useEffect(() => {
@@ -47,7 +46,7 @@ function App() {
       <main className="App" style={isLoading ? loadingMainStyle : loadedMainStyle}>
         {isLoading ?
           (<LoadingDog />) :
-          (<div alt="random dog" className="App-logo image-container" style={imageStyle}></div>)
+          (<img alt="random dog" className="App-logo image-container" src={dogImageUrl} style={imageStyle} />)
         }
         <p>{dogFact}</p>
       </main>
