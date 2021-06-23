@@ -63,7 +63,7 @@ function App() {
         <p>{dogFact}</p>
         <div>
           <button onClick={handleClickNewPhoto}>
-            { isPhotoLoading ? 'loading...' : 'Get New Photo' }
+            {isPhotoLoading ? 'loading...' : 'Get New Photo' }
           </button>
           <button onClick={handleClickNewFact}>
             {isFactLoading ? 'loading...' : 'Get New Fact'}
