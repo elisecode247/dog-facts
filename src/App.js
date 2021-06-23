@@ -53,7 +53,7 @@ function App() {
   return (
     <>
       <header>
-        <h1> Dog Facts </h1>
+        <h1> Dog Facts !!!!</h1>
       </header>
       <main className="App" style={isPhotoLoading ? loadingMainStyle : loadedMainStyle}>
         {isPhotoLoading ?
